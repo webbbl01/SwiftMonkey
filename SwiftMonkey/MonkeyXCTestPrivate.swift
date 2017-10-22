@@ -71,12 +71,11 @@ extension Monkey {
             let locations: [CGPoint]
             if self!.r.randomDouble() < multipleTouchProbability {
                 let numberOfTouches = Int(self!.r.randomUInt32() % 3) + 2
-                let rect = self!.randomRect()
                 locations = (1...numberOfTouches).map { _ in
-                    self!.randomPoint(inRect: rect)
+                    self!.randomTapPoint()
                 }
             } else {
-                locations = [ self!.randomPoint() ]
+                locations = [ self!.randomTapPoint() ]
             }
 
             let semaphore = DispatchSemaphore(value: 0)

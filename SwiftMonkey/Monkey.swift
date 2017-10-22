@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCTest
 
 /**
     A general-purpose class for implementing randomised
@@ -67,6 +68,16 @@ public class Monkey {
 
     var regularActions: [(interval: Int, action: () -> Void)]
     var actionCounter = 0
+    
+    public var tapExcluded = [XCUIElement]() {
+        didSet {
+            let excludedRects = tapExcluded.map { $0.frame }
+            let rects = frame.divided(toExclude: excludedRects, minSize: 16)
+            tapAllowedRectangles = WeightedRectCollection(rects: rects)
+        }
+    }
+    
+    var tapAllowedRectangles = WeightedRectCollection()
 
     /**
         Create a Monkey object with a randomised seed.
@@ -242,6 +253,14 @@ public class Monkey {
     /// Generate a random `CGPoint` inside the frame of the app.
     public func randomPoint() -> CGPoint {
         return randomPoint(inRect: frame)
+    }
+    
+    public func randomTapPoint() -> CGPoint {
+        let randomWeight = randomInt(lessThan: tapAllowedRectangles.maxWeight)
+        guard let rect = tapAllowedRectangles.rect(forWeight: randomWeight) else {
+            return randomPoint()
+        }
+        return randomPoint(inRect: rect)
     }
 
     /**

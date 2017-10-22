@@ -96,9 +96,9 @@ extension Monkey {
             let touches: [CGPoint]
             if self!.r.randomDouble()<multipleTouchProbability {
                 let count = Int(self!.r.randomUInt32() % 2) + 2
-                touches = self!.randomClusteredPoints(count: count)
+                touches = (0..<count).map { _ in self!.randomTapPoint() }
             } else {
-                touches = [ self!.randomPoint() ]
+                touches = [ self!.randomTapPoint() ]
             }
 
             let duration: Double
