@@ -12,5 +12,9 @@ class ClickyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func onButtonTap(_ sender: UIButton) {
+        print(sender.titleLabel!.text!)
+    }
 }
 
