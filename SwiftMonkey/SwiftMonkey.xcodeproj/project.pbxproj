@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C276929C1F9D000B001D5E5D /* CGRectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C276929B1F9D000B001D5E5D /* CGRectExtensions.swift */; };
+		C276929E1F9D06FB001D5E5D /* WeightedRectCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C276929D1F9D06FB001D5E5D /* WeightedRectCollection.swift */; };
 		C929B55F1DD0B966004B256F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C929B55E1DD0B966004B256F /* UIKit.framework */; };
 		C94326421DDB2F260038A891 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94326411DDB2F260038A891 /* XCTest.framework */; };
 		OBJ_22 /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Monkey.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		C276929B1F9D000B001D5E5D /* CGRectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtensions.swift; sourceTree = SOURCE_ROOT; };
+		C276929D1F9D06FB001D5E5D /* WeightedRectCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedRectCollection.swift; sourceTree = SOURCE_ROOT; };
 		C929B55E1DD0B966004B256F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C94326401DDB2D130038A891 /* SwiftMonkey.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = SwiftMonkey.podspec; path = ../SwiftMonkey.podspec; sourceTree = "<group>"; };
 		C94326411DDB2F260038A891 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -97,6 +99,7 @@
 				OBJ_10 /* MonkeyUIAutomation.swift */,
 				OBJ_13 /* Random.swift */,
 				C276929B1F9D000B001D5E5D /* CGRectExtensions.swift */,
+				C276929D1F9D06FB001D5E5D /* WeightedRectCollection.swift */,
 			);
 			name = SwiftMonkey;
 			path = .;
@@ -152,6 +155,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_22 /* Monkey.swift in Sources */,
+				C276929E1F9D06FB001D5E5D /* WeightedRectCollection.swift in Sources */,
 				OBJ_23 /* MonkeyUIAutomation.swift in Sources */,
 				C276929C1F9D000B001D5E5D /* CGRectExtensions.swift in Sources */,
 				OBJ_24 /* MonkeyXCTest.swift in Sources */,
@@ -171,7 +175,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SwiftMonkey.xcodeproj/SwiftMonkey_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -193,7 +197,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SwiftMonkey.xcodeproj/SwiftMonkey_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
