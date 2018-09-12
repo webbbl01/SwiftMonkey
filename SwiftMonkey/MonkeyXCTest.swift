@@ -29,12 +29,14 @@ extension Monkey {
     */
     public func addXCTestTapAlertAction(interval: Int, application: XCUIApplication) {
         addAction(interval: interval) { [weak self] in
+            
+            guard let strongSelf = self else { return }
             // The test for alerts on screen and dismiss them if there are any.
             for i in 0 ..< application.alerts.count {
                 let alert = application.alerts.element(boundBy: i)
                 let buttons = alert.descendants(matching: .button)
                 XCTAssertNotEqual(buttons.count, 0, "No buttons in alert")
-                let index = self!.r.randomInt(lessThan: buttons.count)
+                let index = UInt(strongSelf.r.randomUInt32() % UInt32(buttons.count))
                 let button = buttons.element(boundBy: index)
                 button.tap()
             }
