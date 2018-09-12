@@ -70,6 +70,7 @@ public class Monkey {
 
     var regularActions: [(interval: Int, action: ActionClosure)]
     var actionCounter = 0
+    var elementsToDismiss: [XCUIElement]
 
     /**
         Create a Monkey object with a randomised seed.
@@ -94,10 +95,10 @@ public class Monkey {
         - parameter frame: The frame to generate events in.
           Should be set to the size of the device being tested.
     */
-    public convenience init(frame: CGRect) {
+    public convenience init(frame: CGRect, dismissElements: [XCUIElement]) {
         let time = Date().timeIntervalSinceReferenceDate
         let seed = UInt32(UInt64(time * 1000) & 0xffffffff)
-        self.init(seed: seed, frame: frame)
+        self.init(seed: seed, frame: frame, dismissElements: dismissElements)
     }
 
     /**
@@ -128,12 +129,13 @@ public class Monkey {
         - parameter frame: The frame to generate events in.
           Should be set to the size of the device being tested.
     */
-    public init(seed: UInt32, frame: CGRect) {
+    public init(seed: UInt32, frame: CGRect, dismissElements: [XCUIElement]) {
         self.r = Random(seed: seed)
         self.frame = frame
         self.randomActions = []
         self.totalWeight = 0
         self.regularActions = []
+        self.elementsToDismiss = dismissElements
     }
 
     /**
@@ -168,6 +170,8 @@ public class Monkey {
         for action in randomActions {
             if x < action.accumulatedWeight {
                 action.action()
+                tapElementsToDismissIfVisible()
+                print("Random Check after tap")
                 return
             }
         }
@@ -180,6 +184,18 @@ public class Monkey {
         for action in regularActions {
             if actionCounter % action.interval == 0 {
                 action.action()
+                print("Regular Check after tap")
+                tapElementsToDismissIfVisible()
+            }
+        }
+    }
+    
+    private func tapElementsToDismissIfVisible() {
+        for element in elementsToDismiss {
+            if element.exists && element.isHittable {
+                element.tap()
+            } else {
+                print("Unable to tap element \(element.identifier)")
             }
         }
     }
@@ -277,9 +293,8 @@ public class Monkey {
         that trigger a panel pull-out.
     */
     public func randomPointAvoidingPanelAreas() -> CGPoint {
-        let topHeight: CGFloat = 20
-        let bottomHeight: CGFloat = 20
-        let frameWithoutTopAndBottom = CGRect(x: 0, y: topHeight, width: frame.width, height: frame.height - topHeight - bottomHeight)
+        let statusBarHeight = XCUIApplication().statusBars.firstMatch.frame.height
+        let frameWithoutTopAndBottom = CGRect(x: 0, y: statusBarHeight, width: frame.width, height: frame.height - statusBarHeight * 2)
         return randomPoint(inRect: frameWithoutTopAndBottom)
     }
 
